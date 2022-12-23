@@ -14,7 +14,7 @@ CurrentFileName        :=
 CurrentFilePath        :=
 CurrentFileFullPath    :=
 User                   :=
-Date                   :=12/22/22
+Date                   :=12/23/22
 CodeLitePath           :=/home/stud/.codelite
 LinkerName             :=/usr/bin/g++-10
 SharedObjectLinkerName :=/usr/bin/g++-10 -shared -fPIC
@@ -39,8 +39,8 @@ LinkOptions            :=
 IncludePath            :=  $(IncludeSwitch). $(IncludeSwitch). 
 IncludePCH             := 
 RcIncludePath          := 
-Libs                   := $(LibrarySwitch)crypto++ 
-ArLibs                 :=  "crypto++" 
+Libs                   := $(LibrarySwitch)crypto++ $(LibrarySwitch)boost_system 
+ArLibs                 :=  "crypto++" "boost_system" 
 LibPath                := $(LibraryPathSwitch). 
 
 ##

@@ -14,12 +14,16 @@
 #include <netinet/in.h>
 #include <arpa/inet.h>
 #include <unistd.h>
+#include <boost/algorithm/string.hpp>
+#include <string>
+#include <filesystem>
 using namespace std;
 using namespace CryptoPP;
+using namespace std::filesystem;
 
 class Interface {
     string interface_reference_ = "Потом напишу справку";
-    string server_address_, server_port_ = "77777", input_data_file_, output_data_file_, aut_data_file_ = "/home/stud/test/.config/vclient.conf";
+    string server_address_, server_port_ = "33333", input_data_file_, output_data_file_, aut_data_file_ = "/home/stud/test/.config/vclient.conf";
 public:
     int GetReference();
     int ReceiveArguments(int argc, char* argv[]);
@@ -28,20 +32,33 @@ public:
     string GetInputFile();
     string GetOutputFile();
     string GetAutFile();
+    
+    // Блок методов, которые нужно перенести в private
+    int CheckServerAddress(string server_address);
+    int CheckServerPort(string server_port);
+    int CheckInputFile(string input_data_file);
+    int CheckOutputFile(string output_data_file);
+    int CheckAutFile(string aut_data_file);
+    bool isNumber(const string str);
 };
 
 
 
+template <typename T>
 class ErrorHandler {
-    string what_arg_, what_per_, what_fun_;
+    string what_error_, what_arg_, what_func_;
+    const T arg_value_;
 public:
-    explicit ErrorHandler(string what_arg, string what_per, string what_fun) :
-    what_arg_{ what_arg }, what_per_{ what_per }, what_fun_{ what_fun } { }
+    explicit ErrorHandler<T>(string what_error, string what_arg, const T& arg_value, string what_func) :
+    what_error_{ what_error + '\n' }, what_arg_{ what_arg }, arg_value_ { string(arg_value) + '\n'}, what_func_{ what_func + '\n'} { }
+    explicit ErrorHandler<T>(string what_error) :
+    what_error_{ what_error } { }
+    string GetError() { return what_error_; }
     string GetArg() { return what_arg_; }
-    string GetPer() { return what_per_; }
-    string GetFun() { return what_fun_; }
+    string GetFunc() { return what_func_; }
+    T GetArgValue() { return arg_value_; }
     friend ostream& operator<<(ostream& os, ErrorHandler& er) {
-        return os << er.GetArg() << endl << er.GetPer() << endl << er.GetFun() << endl;
+        return os << er.GetError() << er.GetArg() << er.GetArgValue() << er.GetFunc();
     }
 };
 

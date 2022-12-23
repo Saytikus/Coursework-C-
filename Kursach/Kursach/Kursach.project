@@ -24,6 +24,7 @@
       <Linker Options="">
         <LibraryPath Value="."/>
         <Library Value="crypto++"/>
+        <Library Value="boost_system"/>
       </Linker>
       <ResourceCompiler Options=""/>
     </GlobalSettings>
