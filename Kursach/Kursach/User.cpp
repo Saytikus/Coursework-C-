@@ -18,11 +18,11 @@ string User::GetId() { return user_id_; }
 string User::GetPassword() { return user_password_; }
 string User::GetSALT() { return user_SALT_; }
 string User::GetHASH() { return user_HASH_; }
-string User::GetVectorNumberB() { return vector_number_b_; }
-string User::GetVectorSizeB() { return vector_size_b_; }
-vector<double> User::GetVectorB() { return vector_b_; }
-string User::GetCalcNumberB() { return calculation_number_b_; }
-string User::GetCalcResultB() { return calculation_result_b_; }
+uint32_t User::GetVectorNumber() { return vector_number_; }
+uint32_t User::GetVectorSize() { return vector_size_; }
+vector<float> User::GetVector() { return vector_; }
+uint32_t User::GetCalcNumber() { return calculation_number_; }
+float User::GetCalcResult() { return calculation_result_; }
 
 
 
@@ -33,7 +33,7 @@ int User::SetIdPassword(vector<string> aut_data) {
 }
 
 int User::SetSALT(string SALT){
-    user_SALT_ = SALT;
+	user_SALT_ = SALT;
     return 0;
 }
 
@@ -42,32 +42,32 @@ int User::SetHASH(string HASH) {
     return 0;
 }
 
-int User::SetVectorNumberB(string vector_number_b) {
-    vector_number_b_ = vector_number_b;
+int User::SetVectorNumber(uint32_t vector_number) {
+    vector_number_ = vector_number;
     return 0;
 }
 
-int User::SetVectorB(vector<double> vector_b) {
-    int tmp_int = (int)vector_b[0]; // Блок для инициализации размера вектора( первый элемент в векторе)
-    vector_size_b_ = to_string(tmp_int); //
-    vector_b.erase(vector_b.begin()); // Выбрасываем из вектора его размер
-    vector_b_ = vector_b;
+int User::SetVector(vector<float> vectorv) {
+    int tmp_int = (uint32_t)vectorv[0]; // Блок для инициализации размера вектора( первый элемент в векторе)
+    vector_size_ = tmp_int; //
+    vectorv.erase(vectorv.begin()); // Выбрасываем из вектора его размер
+    vector_ = vectorv;
     return 0;
 }
 
-int User::SetCalcNumberB(string calculation_number_b) {
-    calculation_number_b_ = calculation_number_b;
+int User::SetCalcNumber(uint32_t calculation_number) {
+    calculation_number_ = calculation_number;
     return 0;
 }
 
-int User::SetCalcResultB(string calculation_result_b) {
-    calculation_result_b_ = calculation_result_b;
+int User::SetCalcResult(float calculation_result) {
+    calculation_result_ = calculation_result;
     return 0;
 }
 
 int User::NapisatVector() { // // ВНИМАНИЕ!!! Тестовый метод
-    cout << "\tSize in bin: " << vector_size_b_ << "\tElements in bin: ";
-    for (auto& c : vector_b_)
+    cout << "\tSize: " << vector_size_ << "\tElements: ";
+    for (auto& c : vector_)
         cout << setprecision(10) << c << " ";
     cout << endl;
     return 0;

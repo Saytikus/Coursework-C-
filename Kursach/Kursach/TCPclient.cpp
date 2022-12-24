@@ -48,76 +48,61 @@ int TCPclient::Connection() {
 
 int TCPclient::SendAutMsg(string aut_msg)
 {
-    char msg_to_sent[aut_msg.length() + 1]; // Блок перевода аутентификационной строки в массив чар для отправки серверу
-    aut_msg.copy(msg_to_sent, aut_msg.length() + 1);    //
+    char msg_to_sent[aut_msg.length()]; // Блок перевода аутентификационной строки в массив чар для отправки серверу
+    aut_msg.copy(msg_to_sent, aut_msg.length());    //
     msg_to_sent[aut_msg.length()] = '\0';   //
 
     send(tcp_socket_, msg_to_sent, sizeof(msg_to_sent), 0);
-    cout << "Message: " << msg_to_sent << " was sent to server" << endl;
+    cout << "Message: " << '"' << msg_to_sent << '"' << " was sent to server" << endl;
     return 0;
 }
 
-int TCPclient::SendVectorNumberB(string vector_number_b) {
-    char msg_vector_number_b[vector_number_b.length() + 1]; // Блок перевода строки содержащей число векторов в массив чар для отправки серверу
-    vector_number_b.copy(msg_vector_number_b, vector_number_b.length() + 1);    //
-    msg_vector_number_b[vector_number_b.length()] = '\0';   //
-    
-    send(tcp_socket_, msg_vector_number_b, sizeof(msg_vector_number_b), 0);
-    cout << "Message vector number in bin: " << msg_vector_number_b << " was sent to server" << endl;
+int TCPclient::SendVectorNumber(uint32_t vector_number) {
+	send(tcp_socket_, &vector_number, sizeof(vector_number), 0);
+	cout << "Message vector number: " << vector_number << " was sent to server" << endl;
     return 0;
 }
 
-int TCPclient::SendVectorSizeB(string vector_size_b) {
-    char msg_vector_size_b[vector_size_b.length() + 1]; // Блок перевода строки содержащей размер вектора в массив чар для отправки серверу
-    vector_size_b.copy(msg_vector_size_b, vector_size_b.length() + 1);    //
-    msg_vector_size_b[vector_size_b.length()] = '\0';   //
-    
-    send(tcp_socket_, msg_vector_size_b, sizeof(msg_vector_size_b), 0);
-    cout << "Message vector size in bin: " << msg_vector_size_b << " was sent to server" << endl;
-    
+int TCPclient::SendVectorSize(uint32_t vector_size) {
+    send(tcp_socket_, &vector_size, sizeof(vector_size), 0);
+    cout << "Message vector size: " << vector_size << " was sent to server" << endl;
     return 0;
 }
-int TCPclient::SendVectorB(vector<double> vector_b) {
-    //double* p = vector_b.data();
-    //for(int i = 0; i < vector_b.size(); i++) {
-    //    send(tcp_socket_, *p++, sizeof(p), 0);
-    //}
-    string str;
-    for(int i = 0; i < vector_b.size(); i++) {
-        str += to_string(vector_b[i]) + '_';
-        if(i == vector_b.size() - 1)
-            str += '\0';
+int TCPclient::SendVector(vector<float> vectorvr) {
+    float msg_vector[vectorvr.size()];
+	cout << "Vector: ";
+    for(int i = 0; i < vectorvr.size(); i++) {
+        msg_vector[i] = vectorvr[i];
+		cout << msg_vector[i] << ' ';
     }
-    str.erase(str.length() - 2, str.find('_'));
-    char msg_vector_char_b[str.length() + 1];
-    str.copy(msg_vector_char_b, str.length() + 1);
-    msg_vector_char_b[str.length()] = '\0';
-    for(auto& c : msg_vector_char_b)
-        cout << c;
-    cout << endl << "Size: " << sizeof(msg_vector_char_b);
+	send(tcp_socket_, msg_vector, sizeof(msg_vector), 0);
+	cout << "was sent to server" << endl; 
     return 0;
 }
 
 string TCPclient::ReceiveAndGetResponce() {
-    char received_msg[256];
+    char received_msg[16] = {0};
     recv(tcp_socket_, received_msg, sizeof(received_msg), 0);
-    string responce = string(received_msg);
-    cout << "Responce from server: " << responce << endl;
+	string responce;
+    for(auto& c : received_msg) {
+		responce += c;
+	}
+    cout << "Responce from server: " << responce  << endl;
     return responce;
 }
 
-string TCPclient::ReceiveCalcNumberB() { // Нужен uint32_t
-    char received_calc_number_b[256];
-    recv(tcp_socket_, received_calc_number_b, sizeof(received_calc_number_b), 0);
-    string calc_number_b = string(received_calc_number_b);
-    return calc_number_b;
-}
+/*string TCPclient::ReceiveCalcNumber() { // Нужен uint32_t
+    char received_calc_number[256];
+    recv(tcp_socket_, received_calc_number, sizeof(received_calc_number), 0);
+    string calc_number = string(received_calc_number);
+    return calc_number;
+}*/
 
-string TCPclient::ReceiveCalcResultB() {
-    char received_calc_result_b[256];
-    recv(tcp_socket_, received_calc_result_b, sizeof(received_calc_result_b), 0);
-    string calc_result_b = string(received_calc_result_b);
-    return calc_result_b;
+float TCPclient::ReceiveCalcResult() {
+    float received_calc_result;
+    recv(tcp_socket_, &received_calc_result, sizeof(received_calc_result), 0);
+	cout << "Received calculation result: " << received_calc_result << endl;
+	return received_calc_result;
 }
 
 int TCPclient::CloseConnection() {

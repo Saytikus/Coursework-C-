@@ -1,23 +1,22 @@
 #include <User.h>
 
-string UserHandler::GetVectorNumberB(string input_data_file) {
-        string vector_number_b;
+uint32_t UserHandler::GetVectorNumber(string input_data_file) {
+        uint32_t vector_number;
         ifstream file(input_data_file);
         if (file.is_open()) {
             string s;
             getline(file, s);
-            vector_number_b = DecToBinInt(stoi(s));
-            vector_number_b.erase(0, vector_number_b.find('1'));
+            vector_number = stoi(s);
             file.close();
         }
-        return vector_number_b;
+        return vector_number;
 }
-vector <double> UserHandler::GetVectorB(string input_data_file, int string_number) {
+vector <float> UserHandler::GetVector(string input_data_file, int string_number) {
         if (string_number < 2) {
             cerr << "String_number error" << endl;// Блок обработки ошибок
             exit(1);
         }
-        vector <double> vs;
+        vector <float> vs;
         ifstream file(input_data_file);
         if (file.is_open()) {
             for(int i = 1; i < string_number; i++) {
@@ -27,10 +26,9 @@ vector <double> UserHandler::GetVectorB(string input_data_file, int string_numbe
             string s;
             getline(file, s);
             istringstream is(s);
-            double word;
+            float word;
             while (is >> word) {
-                double tmp = stod(DecToBinFloat(word));
-                vs.push_back(tmp);
+                vs.push_back(word);
             }
             file.close();
         }
@@ -54,7 +52,7 @@ vector <string>UserHandler::GetAutData(string aut_data_file) {
 }
 
 string UserHandler::GetHashFromPassword(string Salt, string user_password) {
-    string result,Hash, salted_password = user_password + Salt;
+    string result,Hash, salted_password = Salt + user_password;
     HexEncoder encoder(new StringSink(result));
     Weak::MD5 md5;
     md5.Update((const byte*)&salted_password[0], salted_password.size());
@@ -64,7 +62,7 @@ string UserHandler::GetHashFromPassword(string Salt, string user_password) {
     return result;
 }
 
-string UserHandler::DecToBinInt(int number) {
+/*string UserHandler::DecToBinInt(int number) {
         int temp;
         string str;
         for (temp = 32768; temp > 0; temp = temp / 2) {
@@ -104,7 +102,7 @@ int UserHandler::BinToDecInt(int value) {
             result += i * (value % 10);
         }
         return result;
-}
+}*/
 
 int UserHandler::RecordCalcNumber(uint32_t calculations_number, string output_data_file) {
     ifstream check_file(output_data_file);
@@ -112,8 +110,8 @@ int UserHandler::RecordCalcNumber(uint32_t calculations_number, string output_da
         // Блок обработки ошибок
     }
     check_file.close();
-    ofstream file(output_data_file, ios::app);
-    file << calculations_number << "\n";
+    ofstream file(output_data_file, ios::binary);
+    file.write((char*)&calculations_number, sizeof(calculations_number));
     file.close();
     return 0;
 }
@@ -124,8 +122,9 @@ int UserHandler::RecordCalcResult(float calculation_result, string output_data_f
         // Блок обработки ошибок
     }
     check_file.close();
-    ofstream file(output_data_file, ios::app);
-    file << calculation_result << "\n";
+    ofstream file(output_data_file, ios::binary | ios::app);
+    file.write((char*)&calculation_result, sizeof(calculation_result));
+	cout << "Calculations result: " << calculation_result << " was record in file" << endl;
     file.close();
     return 0;
 }
