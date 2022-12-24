@@ -64,11 +64,3 @@ int User::SetCalcResult(float calculation_result) {
     calculation_result_ = calculation_result;
     return 0;
 }
-
-int User::NapisatVector() { // // ВНИМАНИЕ!!! Тестовый метод
-    cout << "\tSize: " << vector_size_ << "\tElements: ";
-    for (auto& c : vector_)
-        cout << setprecision(10) << c << " ";
-    cout << endl;
-    return 0;
-}

@@ -10,7 +10,6 @@
   <VirtualDirectory Name="src">
     <File Name="TCPclient.cpp"/>
     <File Name="Interface.cpp"/>
-    <File Name="TestClass.cpp"/>
     <File Name="UserHandler.cpp"/>
     <File Name="User.cpp"/>
     <File Name="main.cpp"/>

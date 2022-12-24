@@ -60,7 +60,7 @@ AS       := as
 ## User defined environment variables
 ##
 CodeLiteDir:=/usr/share/codelite
-Objects0=../../Kursach!client/build-$(ConfigurationName)/__/Kursach/Kursach/main.cpp$(ObjectSuffix) ../../Kursach!client/build-$(ConfigurationName)/__/Kursach/Kursach/User.cpp$(ObjectSuffix) ../../Kursach!client/build-$(ConfigurationName)/__/Kursach/Kursach/UserHandler.cpp$(ObjectSuffix) ../../Kursach!client/build-$(ConfigurationName)/__/Kursach/Kursach/TestClass.cpp$(ObjectSuffix) ../../Kursach!client/build-$(ConfigurationName)/__/Kursach/Kursach/Interface.cpp$(ObjectSuffix) ../../Kursach!client/build-$(ConfigurationName)/__/Kursach/Kursach/TCPclient.cpp$(ObjectSuffix) 
+Objects0=../../Kursach!client/build-$(ConfigurationName)/__/Kursach/Kursach/main.cpp$(ObjectSuffix) ../../Kursach!client/build-$(ConfigurationName)/__/Kursach/Kursach/User.cpp$(ObjectSuffix) ../../Kursach!client/build-$(ConfigurationName)/__/Kursach/Kursach/UserHandler.cpp$(ObjectSuffix) ../../Kursach!client/build-$(ConfigurationName)/__/Kursach/Kursach/Interface.cpp$(ObjectSuffix) ../../Kursach!client/build-$(ConfigurationName)/__/Kursach/Kursach/TCPclient.cpp$(ObjectSuffix) 
 
 
 
@@ -114,14 +114,6 @@ PreBuild:
 
 ../../Kursach!client/build-$(ConfigurationName)/__/Kursach/Kursach/UserHandler.cpp$(PreprocessSuffix): UserHandler.cpp
 	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) ../../Kursach!client/build-$(ConfigurationName)/__/Kursach/Kursach/UserHandler.cpp$(PreprocessSuffix) UserHandler.cpp
-
-../../Kursach!client/build-$(ConfigurationName)/__/Kursach/Kursach/TestClass.cpp$(ObjectSuffix): TestClass.cpp ../../Kursach!client/build-$(ConfigurationName)/__/Kursach/Kursach/TestClass.cpp$(DependSuffix)
-	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/stud/C++Projects/Kursach!client/Kursach/Kursach/TestClass.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/TestClass.cpp$(ObjectSuffix) $(IncludePath)
-../../Kursach!client/build-$(ConfigurationName)/__/Kursach/Kursach/TestClass.cpp$(DependSuffix): TestClass.cpp
-	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT../../Kursach!client/build-$(ConfigurationName)/__/Kursach/Kursach/TestClass.cpp$(ObjectSuffix) -MF../../Kursach!client/build-$(ConfigurationName)/__/Kursach/Kursach/TestClass.cpp$(DependSuffix) -MM TestClass.cpp
-
-../../Kursach!client/build-$(ConfigurationName)/__/Kursach/Kursach/TestClass.cpp$(PreprocessSuffix): TestClass.cpp
-	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) ../../Kursach!client/build-$(ConfigurationName)/__/Kursach/Kursach/TestClass.cpp$(PreprocessSuffix) TestClass.cpp
 
 ../../Kursach!client/build-$(ConfigurationName)/__/Kursach/Kursach/Interface.cpp$(ObjectSuffix): Interface.cpp ../../Kursach!client/build-$(ConfigurationName)/__/Kursach/Kursach/Interface.cpp$(DependSuffix)
 	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/stud/C++Projects/Kursach!client/Kursach/Kursach/Interface.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/Interface.cpp$(ObjectSuffix) $(IncludePath)

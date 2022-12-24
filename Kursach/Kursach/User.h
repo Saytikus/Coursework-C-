@@ -25,6 +25,12 @@ namespace fs = std::experimental::filesystem::v1;
 class Interface {
     string interface_reference_ = "Потом напишу справку";
     string server_address_, server_port_, input_data_file_, output_data_file_, aut_data_file_;
+	int CheckServerAddress(string server_address);
+    int CheckServerPort(string server_port);
+    int CheckInputFile(string input_data_file);
+    int CheckOutputFile(string output_data_file);
+    int CheckAutFile(string aut_data_file);
+    bool isNumber(const string str);
 public:
     int GetReference();
     int ReceiveArguments(int argc, char* argv[]);
@@ -33,14 +39,6 @@ public:
     string GetInputFile();
     string GetOutputFile();
     string GetAutFile();
-    
-    // Блок методов, которые нужно перенести в private
-    int CheckServerAddress(string server_address);
-    int CheckServerPort(string server_port);
-    int CheckInputFile(string input_data_file);
-    int CheckOutputFile(string output_data_file);
-    int CheckAutFile(string aut_data_file);
-    bool isNumber(const string str);
 };
 
 
@@ -99,7 +97,6 @@ public:
     int SetVector(vector<float> vector);
     int SetCalcNumber(uint32_t calculation_number);
     int SetCalcResult(float calculation_result);
-    int NapisatVector();  // ВНИМАНИЕ!!! Тестовый метод
 };
 
 
@@ -110,9 +107,6 @@ public:
     vector <float> GetVector(string input_data_file, int string_number);
     vector<string>GetAutData(string aut_data_file);
     string GetHashFromPassword(string Salt, string user_password);
-    /*string DecToBinInt(int number);
-    string DecToBinFloat(double n);
-    int BinToDecInt(int value);*/
     int RecordCalcNumber(uint32_t calculations_number, string output_data_file);
     int RecordCalcResult(float calculation_result, string output_data_file);
 };
@@ -146,18 +140,6 @@ public:
     int SendVectorSize(uint32_t vector_size);
     int SendVector(vector<float> vectorvr);
     string ReceiveAndGetResponce();
-    //string ReceiveCalcNumber();
     float ReceiveCalcResult();
     int CloseConnection();
-};
-
-
-
-class TEST {
-    vector <double> test_vector_;
-public:
-    int SetTestVector(vector <double> test_vector);
-    int NapisatVector();
-    double GetCalcResult();
-    unsigned BinToDec(unsigned Value);
 };

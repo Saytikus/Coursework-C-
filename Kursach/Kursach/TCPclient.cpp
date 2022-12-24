@@ -91,13 +91,6 @@ string TCPclient::ReceiveAndGetResponce() {
     return responce;
 }
 
-/*string TCPclient::ReceiveCalcNumber() { // Нужен uint32_t
-    char received_calc_number[256];
-    recv(tcp_socket_, received_calc_number, sizeof(received_calc_number), 0);
-    string calc_number = string(received_calc_number);
-    return calc_number;
-}*/
-
 float TCPclient::ReceiveCalcResult() {
     float received_calc_result;
     recv(tcp_socket_, &received_calc_result, sizeof(received_calc_result), 0);
@@ -106,6 +99,7 @@ float TCPclient::ReceiveCalcResult() {
 }
 
 int TCPclient::CloseConnection() {
+	cout << "Connection was closed" << endl;
     close(tcp_socket_);
     return 0;
 }

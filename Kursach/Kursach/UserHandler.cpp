@@ -62,48 +62,6 @@ string UserHandler::GetHashFromPassword(string Salt, string user_password) {
     return result;
 }
 
-/*string UserHandler::DecToBinInt(int number) {
-        int temp;
-        string str;
-        for (temp = 32768; temp > 0; temp = temp / 2) {
-            if (temp & number)
-                str += "1";
-            else
-                str += "0";
-        }
-        return str;
-}
-string UserHandler::DecToBinFloat(double n) {
-        bool neg = n < 0;
-        if (neg) n = -n;
-        string s = "";
-        int d = (int)n;
-        if (d)
-            for (; d; d /= 2)
-                s = char('0' + d % 2) + s;
-        else
-            s = "0";
-        double f = n - (int)n;
-        if (f) {
-            s += ".";
-            for (int i = 10; f && i; i--) {
-                f *= 2;
-                s += char((int)f + '0');
-                f -= (int)f;
-            }
-        }
-        if (neg) s = "-" + s;
-        return s;
-}
-
-int UserHandler::BinToDecInt(int value) {
-        int result = 0;
-        for (int i = 1; value; value /= 10, i *= 2) {
-            result += i * (value % 10);
-        }
-        return result;
-}*/
-
 int UserHandler::RecordCalcNumber(uint32_t calculations_number, string output_data_file) {
     ifstream check_file(output_data_file);
     if (!check_file.is_open()) {

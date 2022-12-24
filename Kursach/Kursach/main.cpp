@@ -37,28 +37,7 @@ int main(int argc, char* argv[]) {
 			handler.RecordCalcResult(user.GetCalcResult(), user.GetOutputFile());	// Записываем в бинарный файл результат вычислений
 		}
 		cout << "Data exchange successfully!" << endl;
-        /*for(int i = 2; i < 2 + handler.BinToDecInt(stoi(user.GetVectorNumberB())); i++) { // Цикл передачи серверу размера вектора и самого вектора
-            user.SetVectorB(handler.GetVectorB(user.GetInputFile(), i));   
-            //cout << "Vector №" << i - 1 << " in bin:"; // Тест1
-            //user.NapisatVector(); // Тест2
-            client.SendVectorSizeB(user.GetVectorSizeB()); // Передаем серверу размер вектора
-            client.SendVectorB(user.GetVectorB()); // Передаем серверу вектор
-        }
-        client.CloseConnection(); */
-        
-        // Блок передачи векторов на сервер и получения результатов
-
-        //TEST test;
-        //cout << handler.GetVectorsNumberB("/home/stud/test/test1") << endl;
-        //test.SetTestVector(handler.GetVectorB("/home/stud/test/test1"));
-        //test.NapisatVector();
-        //cout << test.GetCalcResult() << endl;
-        //cout << handler.GetHashFromPassword(Salt, user.GetPassword()) << endl;
-        //return 0;
-        /*handler.RecordCalcNumber(6, "/home/stud/test/test_output_file");
-        for(int i = 0; i<6; i++) {
-            handler.RecordCalcResult(12.5, "/home/stud/test/test_output_file");
-        }*/
+		client.CloseConnection();
     }
     catch (ErrorHandler<string>& eh) {
         cout << eh << endl;
