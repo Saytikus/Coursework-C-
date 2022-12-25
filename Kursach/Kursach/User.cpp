@@ -1,13 +1,12 @@
-#include <User.h>\
+#include "User.h"
 
-User::User(string server_address, string server_port, string input_data_file, string output_data_file, string aut_data_file) {
-    server_address_ = server_address;
-    server_port_ = server_port;
-    input_data_file_ = input_data_file;
-    output_data_file_ = output_data_file;
-    aut_data_file_ = aut_data_file;
+User::User(Interface interface) {
+    server_address_ = interface.GetServerAddress();
+    server_port_ = interface.GetServerPort();
+    input_data_file_ = interface.GetInputFile();
+    output_data_file_ = interface.GetOutputFile();
+    aut_data_file_ = interface.GetAutFile();
 }
-
 
 string User::GetInputFile() { return input_data_file_; }
 string User::GetOutputFile() { return output_data_file_; }

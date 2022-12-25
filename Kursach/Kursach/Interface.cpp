@@ -1,4 +1,4 @@
-#include <User.h>
+#include "User.h"
 
 int Interface::GetReference() { cout << interface_reference_ << endl; return 0;}
 
@@ -23,8 +23,9 @@ int Interface::ReceiveArguments(int argc, char* argv[]) {
         {0, 0, 0, 0}
     };
     int opt;
+	int opt_index = 0;
 	string server_address, server_port, input_file, output_file, aut_file;
-    while ((opt = getopt_long(argc, argv, ":h0:1:2::3:4::", long_options, NULL)) != -1)
+    while ((opt = getopt_long(argc, argv, ":h0:1:2::3:4::", long_options, &opt_index)) != -1)
     {
         string check;
         switch(opt) {
@@ -35,32 +36,42 @@ int Interface::ReceiveArguments(int argc, char* argv[]) {
             case '0':
                 server_address = optarg;
 				if(server_address.find('-') != -1)
-					throw ErrorHandler<string>("Error:	Invalid argument in option server_address", "server_address = ", server_address, "ReceiveArguments()");
+					throw ErrorHandler<string>("Interface error:	Invalid argument in option server_address", 
+											   "server_address = ", server_address, "ReceiveArguments()");
                 break;
             
             case '1':
 				server_port = optarg;
 				if(server_port.find('-') != -1)
-					throw ErrorHandler<string>("Error:	Invalid argument in option server_port", "server_port = ", server_port, "ReceiveArguments()");
+					throw ErrorHandler<string>("Interface error:	Invalid argument in option server_port", 
+											   "server_port = ", server_port, "ReceiveArguments()");
                 break;
                 
             case '2':
                 input_file = optarg;
 				if(input_file.find('-') != -1)
-					throw ErrorHandler<string>("Error:	Invalid argument in option input_file", "input_file = ", input_file, "ReceiveArguments()");
+					throw ErrorHandler<string>("Interface error:	Invalid argument in option input_file", 
+											   "input_file = ", input_file, "ReceiveArguments()");
                 break;
             
             case '3':
                 output_file = optarg;
 				if(output_file.find('-') != -1)
-					throw ErrorHandler<string>("Error:	Invalid argument in option output_file", "output_file = ", output_file, "ReceiveArguments()");
+					throw ErrorHandler<string>("Interface error:	Invalid argument in option output_file", 
+											   "output_file = ", output_file, "ReceiveArguments()");
 				break;
                 
             case '4':
 				aut_file = optarg;
 				if(aut_file.find('-') != -1)
-					throw ErrorHandler<string>("Error:	Invalid argument in option aut_file", "aut_file = ", aut_file, "ReceiveArguments()");
+					throw ErrorHandler<string>("Interface error:	Invalid argument in option aut_file", 
+											   "aut_file = ", aut_file, "ReceiveArguments()");
 				break;
+				
+			case '?':
+				string opt_string(long_options[opt_index].name);
+				throw ErrorHandler<string>("Interface error:	Unknown option", 
+										   "opt = ", opt_string, "ReceiveArguments()"); 
         }
     }
 	if(server_port.empty())
@@ -83,14 +94,17 @@ int Interface::ReceiveArguments(int argc, char* argv[]) {
 
 int Interface::CheckServerAddress(string server_address) {
     if(server_address.empty())
-        throw ErrorHandler<string>("Error:	Empty server address", "server_address_ = ", server_address, "ReceiveArguments()::CheckServerAddress()");
+        throw ErrorHandler<string>("Interface error:	Empty server address", "server_address_ = ", 
+								   server_address, "ReceiveArguments()");
     vector<string> server_address_vector;   // Создаем вектор для проверки каждого числа адреса
     boost::split(server_address_vector, server_address, boost::is_any_of(".")); // Разбиваем строку с адресом вектора на элементы
     if(server_address_vector.size() != 4)
-        throw ErrorHandler<string>("Error:	Invalid server address", "server_address_ = ", server_address, "ReceiveArguments()::CheckServerAddress()");
+        throw ErrorHandler<string>("Interface error:	Invalid server address", "server_address_ = ", server_address,
+								   "ReceiveArguments()");
     for(auto& server_address_digit : server_address_vector) {   // Блок проверки каждого числа в адресе
         if(!isNumber(server_address_digit) || stoi(server_address_digit) < 0 || stoi(server_address_digit) > 255) 
-            throw ErrorHandler<string>("Error:	Invalid digit in server address", "server_address_digit = ", server_address_digit, "ReceiveArguments()::CheckServerAddress");
+            throw ErrorHandler<string>("Interface error:	Invalid digit in server address", "server_address_digit = ", 
+									   server_address_digit, "ReceiveArguments()");
     }
     return 0;
 }
@@ -100,39 +114,51 @@ int Interface::CheckServerPort(string server_port) {
     boost::split(server_port_vector, server_port, boost::is_any_of(""));
     for(auto& server_port_digit : server_port_vector) {
         if(!isNumber(server_port_digit))
-            throw ErrorHandler<string>("Error:	Invalid digit in server port", "server_port_digit = ", server_port_digit, "ReceiveArguments()::CheckServerPort()");
+            throw ErrorHandler<string>("Interface error:	Invalid digit in server port", "server_port_digit = ",
+									   server_port_digit, "ReceiveArguments()");
     }
     if(stoi(server_port) < 1024 || stoi(server_port) > 65535)
-        throw ErrorHandler<string>("Error:	Invalid server port", "server_port_ = ", server_port, "ReceiveArguments()::CheckServerPort()");
+        throw ErrorHandler<string>("Interface error:	Invalid server port", "server_port_ = ",
+								   server_port, "ReceiveArguments()");
 }
 
 int Interface::CheckInputFile(string input_data_file) {
     if(input_data_file.empty())
-        throw ErrorHandler<string>("Error:	Empty input file", "input_data_file_ = ", input_data_file, "ReceiveArguments()::CheckInputFile()");
+        throw ErrorHandler<string>("Interface error:	Empty input filename", "input_data_file_ = ", input_data_file,
+								   "ReceiveArguments()");
 	fs::path input_data_file_status(input_data_file);
 	if(!fs::is_regular_file(input_data_file_status))
-		throw ErrorHandler<string>("Error:	Input file is not regular file", "input_data_file_ = ", input_data_file, "ReceiveArguments()::CheckInputFile()");
+		throw ErrorHandler<string>("Interface error:	Input file is not regular file", "input_data_file_ = ", 
+							       input_data_file, "ReceiveArguments()");
     ifstream check_file(input_data_file);
     if(check_file.is_open() == false)
-        throw ErrorHandler<string>("Error:	Invalid input file", "input_data_file_ = ", input_data_file_, "ReceiveArguments()::CheckInputFile()");
+        throw ErrorHandler<string>("Interface error:	Invalid input filename", "input_data_file_ = ",
+								   input_data_file_, "ReceiveArguments()");
 }
 int Interface::CheckOutputFile(string output_data_file) {
     if(output_data_file.empty())
-        throw ErrorHandler<string>("Error:	Empty output file", "output_data_file_ = ", output_data_file, "ReceiveArguments()::CheckOutputFile()");
+        throw ErrorHandler<string>("Interface error:	Empty output filename", "output_data_file_ = ", 
+								   output_data_file, "ReceiveArguments()");
     fs::path output_data_file_status(output_data_file);
 	if(!fs::is_regular_file(output_data_file_status))
-		throw ErrorHandler<string>("Error:	Output file is not regular file", "output_data_file_ = ", output_data_file, "ReceiveArguments()::CheckOutputFile()");
+		throw ErrorHandler<string>("Interface error:	Output file is not regular file", "output_data_file_ = ", 
+								   output_data_file, "ReceiveArguments()");
     ifstream check_file(output_data_file);
     if(check_file.is_open() == false)
-        throw ErrorHandler<string>("Error:	Invalid output file", "input_data_file_ = ", output_data_file_, "ReceiveArguments()::CheckOutputFile()");
+        throw ErrorHandler<string>("Interface error:	Invalid output filename", "input_data_file_ = ", 
+								   output_data_file_, "ReceiveArguments()");
 }
 int Interface::CheckAutFile(string aut_data_file) {
     fs::path aut_data_file_status(aut_data_file);
 	if(!fs::is_regular_file(aut_data_file_status))
-		throw ErrorHandler<string>("Error:	Autentification file is not regular file", "aut_data_file_ = ", aut_data_file, "ReceiveArguments()::CheckAutFile()");
+		throw ErrorHandler<string>("Interface error:	Autentification file is not regular file", 
+								   "aut_data_file_ = ", aut_data_file, 
+								   "ReceiveArguments()");
     ifstream check_file(aut_data_file);
     if(check_file.is_open() == false)
-        throw ErrorHandler<string>("Error:	Invalid autentification file", "aut_data_file_ = ", aut_data_file_, "ReceiveArguments()::CheckAutFile()");
+        throw ErrorHandler<string>("Interface error:	Invalid autentification filename", 
+								   "aut_data_file_ = ", aut_data_file_, 
+								   "ReceiveArguments()");
 }
 
 bool Interface::isNumber(const string str) {

@@ -1,7 +1,6 @@
-#include <User.h>
+#include "User.h"
 
-TCPclient::TCPclient(User user)
-{
+TCPclient::TCPclient(User user) {
     tcp_socket_ = socket(AF_INET, SOCK_STREAM, 0); 
     if (tcp_socket_ == -1) {
         cerr << "Socket error" << endl;
@@ -15,16 +14,6 @@ TCPclient::TCPclient(User user)
 
     server_address_ = user.GetServerAddress();
     server_port_ = user.GetServerPort();
-}
-
-string TCPclient::GetServerAddress()
-{
-    return server_address_;
-}
-
-string TCPclient::GetServerPort()
-{
-    return server_port_;
 }
 
 int TCPclient::Connection() {
@@ -46,14 +35,12 @@ int TCPclient::Connection() {
     return 0;
 }
 
-int TCPclient::SendAutMsg(string aut_msg)
-{
-    char msg_to_sent[aut_msg.length()]; // Блок перевода аутентификационной строки в массив чар для отправки серверу
-    aut_msg.copy(msg_to_sent, aut_msg.length());    //
-    msg_to_sent[aut_msg.length()] = '\0';   //
+int TCPclient::SendAutMsg(string aut_msg) {
+    char msg_to_send[aut_msg.length()];
+	strcpy(msg_to_send, aut_msg.c_str());
 
-    send(tcp_socket_, msg_to_sent, sizeof(msg_to_sent), 0);
-    cout << "Message: " << '"' << msg_to_sent << '"' << " was sent to server" << endl;
+    send(tcp_socket_, msg_to_send, sizeof(msg_to_send), 0);
+    cout << "Message: " << '"' << msg_to_send << '"' << " was sent to server" << endl;
     return 0;
 }
 
@@ -99,7 +86,7 @@ float TCPclient::ReceiveCalcResult() {
 }
 
 int TCPclient::CloseConnection() {
-	cout << "Connection was closed" << endl;
+	cout << "Connection closed" << endl;
     close(tcp_socket_);
     return 0;
 }

@@ -25,11 +25,11 @@ namespace fs = std::experimental::filesystem::v1;
 class Interface {
     string interface_reference_ = "Потом напишу справку";
     string server_address_, server_port_, input_data_file_, output_data_file_, aut_data_file_;
-	int CheckServerAddress(string server_address);
-    int CheckServerPort(string server_port);
-    int CheckInputFile(string input_data_file);
-    int CheckOutputFile(string output_data_file);
-    int CheckAutFile(string aut_data_file);
+	int CheckServerAddress(const string server_address);
+    int CheckServerPort(const string server_port);
+    int CheckInputFile(const string input_data_file);
+    int CheckOutputFile(const string output_data_file);
+    int CheckAutFile(const string aut_data_file);
     bool isNumber(const string str);
 public:
     int GetReference();
@@ -49,13 +49,11 @@ class ErrorHandler {
     const T arg_value_;
 public:
     explicit ErrorHandler<T>(string what_error, string what_arg, const T& arg_value, string what_func) :
-    what_error_{ what_error + '\n' }, what_arg_{ what_arg }, arg_value_ { string(arg_value) + '\n'}, what_func_{ what_func} { }
-    explicit ErrorHandler<T>(string what_error) :
-    what_error_{ what_error } { }
+    what_error_{ what_error + '\n' }, what_arg_{ what_arg }, arg_value_ { string(arg_value) + '\n'}, what_func_{ what_func } { }
     string GetError() { return what_error_; }
     string GetArg() { return what_arg_; }
+	T GetArgValue() { return arg_value_; }
     string GetFunc() { return what_func_; }
-    T GetArgValue() { return arg_value_; }
     friend ostream& operator<<(ostream& os, ErrorHandler& er) {
         return os << er.GetError() << er.GetArg() << er.GetArgValue() << er.GetFunc();
     }
@@ -75,7 +73,7 @@ class User {
     float calculation_result_;
 public:
     User() = delete;
-    User(string server_address, string server_port, string input_data_file, string output_data_file, string aut_data_file);
+    User(Interface interface);
     string GetInputFile();
     string GetOutputFile();
     string GetAutFile();
@@ -102,10 +100,21 @@ public:
 
 
 class UserHandler {
+	bool isNumber(const string str);
+	int CheckVectorNumber(const string vector_number_string);
+	int CheckStringNumber(const int string_number);
+	int CheckVector(const vector<float> check_vector);
+	int CheckStreamValue(const string s);
+	int CheckAutData(const vector<string> aut_data, const string aut_data_file);
+	int CheckAutFile(const string aut_data_file);
+	int CheckVectorFile(const string input_data_file);
+	int CheckSaltAndPassword(const string Salt, const string user_password);
+	int CheckFileForRecordNumber(const string output_data_file);
+	int CheckFileForRecordResult(const string output_data_file);
 public:
-    uint32_t GetVectorNumber(string input_data_file);
-    vector <float> GetVector(string input_data_file, int string_number);
-    vector<string>GetAutData(string aut_data_file);
+    uint32_t GetVectorNumberFromFile(string input_data_file);
+    vector <float> GetVectorFromFile(string input_data_file, int string_number);
+    vector<string>GetAutDataFromFile(string aut_data_file);
     string GetHashFromPassword(string Salt, string user_password);
     int RecordCalcNumber(uint32_t calculations_number, string output_data_file);
     int RecordCalcResult(float calculation_result, string output_data_file);
@@ -128,12 +137,9 @@ class TCPclient {
     sockaddr_in * server_addr_;
     int tcp_socket_;
     int required_connection_;
-    
 public:
     TCPclient() = delete;
     TCPclient(User user);
-    string GetServerAddress();
-    string GetServerPort();
     int Connection();
     int SendAutMsg(string aut_msg);
     int SendVectorNumber(uint32_t vector_number);

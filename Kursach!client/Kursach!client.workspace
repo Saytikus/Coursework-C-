@@ -1,14 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CodeLite_Workspace Name="Kursach!client" Database="" Version="10000">
   <Project Name="Kursach" Path="../Kursach/Kursach/Kursach.project" Active="Yes"/>
+  <Project Name="UnitTest" Path="../UnitTest/UnitTest/UnitTest.project" Active="No"/>
   <BuildMatrix>
     <WorkspaceConfiguration Name="Debug" Selected="yes">
       <Environment/>
       <Project Name="Kursach" ConfigName="Debug"/>
+      <Project Name="UnitTest" ConfigName="Debug"/>
     </WorkspaceConfiguration>
     <WorkspaceConfiguration Name="Release" Selected="yes">
       <Environment/>
       <Project Name="Kursach" ConfigName="Release"/>
+      <Project Name="UnitTest" ConfigName="Release"/>
     </WorkspaceConfiguration>
   </BuildMatrix>
 </CodeLite_Workspace>
