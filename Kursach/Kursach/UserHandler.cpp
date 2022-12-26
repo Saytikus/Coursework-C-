@@ -83,14 +83,11 @@ bool UserHandler::isNumber(const string str) {
 }
 
 int UserHandler::CheckVectorNumber(const string vector_number_string) {
-	if(vector_number_string.empty())
-		throw ErrorHandler<string>("UserHandler error:	Empty string for vector number", 
-								   "vector_number_string = ", vector_number_string, 
-								   "GetVectorNumberFromFile(string input_data_file)");
 	if(!isNumber(vector_number_string))
 		throw ErrorHandler<string>("UserHandler error:	Invalid digit in string for vector number", 
 								   "vector_number_string = ", vector_number_string, 
 								   "GetVectorNumberFromFile(string input_data_file)");
+	return 0;
 }
 
 int UserHandler::CheckStringNumber(const int string_number) {
@@ -98,6 +95,7 @@ int UserHandler::CheckStringNumber(const int string_number) {
 		throw ErrorHandler<string>("UserHandler error:	Too small string number for start read vectors", 
 								   "string_number = ", to_string(string_number), 
 								   "GetVectorFromFile(string input_data_file)");
+	return 0;
 }
 
 int UserHandler::CheckVector(const vector<float> vectorvr) {
@@ -111,6 +109,7 @@ int UserHandler::CheckVector(const vector<float> vectorvr) {
 								   "vectorvr[0] = ", to_string(tmp),
 								   "GetVectorFromFile(string input_data_file)");
 	}
+	return 0;
 }
 
 int UserHandler::CheckStreamValue(const string s) {
@@ -145,6 +144,7 @@ int UserHandler::CheckStreamValue(const string s) {
 										   "vectorvr = ", pair_integer_fractional[0], 
 								           "GetVectorFromFile(string input_data_file)");
 		}
+		return 0;
 }
 
 int UserHandler::CheckAutData(const vector<string> aut_data, const string aut_data_file) {
@@ -167,6 +167,7 @@ int UserHandler::CheckAutData(const vector<string> aut_data, const string aut_da
 								   "aut_data = ", aut_data_string, 
 								   "GetAutDataFromFile(string aut_data_file)");
 	}
+	return 0;
 }
 
 int UserHandler::CheckAutFile(const string aut_data_file) {
@@ -189,6 +190,7 @@ int UserHandler::CheckAutFile(const string aut_data_file) {
 		throw ErrorHandler<string>("UserHandler error:	Aut file is not regular file", 
 								   "aut_data_file_ = ", aut_data_file, 
 								   "GetAutDataFromFile(string aut_data_file)");
+	return 0;
 }
 
 int UserHandler::CheckVectorFile(const string input_data_file) {
@@ -211,6 +213,7 @@ int UserHandler::CheckVectorFile(const string input_data_file) {
 		throw ErrorHandler<string>("UserHandler error:	Input file is not regular file", 
 							       "input_data_file_ = ", input_data_file, 
 								   "GetVectorNumberFromFile(string aut_data_file)");
+	return 0;
 }
 
 int UserHandler::CheckSaltAndPassword(const string Salt, const string user_password) {
@@ -222,6 +225,7 @@ int UserHandler::CheckSaltAndPassword(const string Salt, const string user_passw
 		throw ErrorHandler<string>("UserHandler error:	Empty user password", 
 							       "user_password = ", user_password, 
 								   "GetHashFromPassword(string Salt, string user_password)");
+	return 0;
 }
 
 int UserHandler::CheckFileForRecordNumber(const string output_data_file) {
@@ -240,6 +244,7 @@ int UserHandler::CheckFileForRecordNumber(const string output_data_file) {
 		throw ErrorHandler<string>("UserHandler error:	Output file is not regular file", 
 							       "output_data_file_ = ", output_data_file, 
 								   "RecordCalcNumber(uint32_t calculations_number, string aut_data_file)");
+	return 0;
 }
 
 int UserHandler::CheckFileForRecordResult(const string output_data_file) {
@@ -258,4 +263,5 @@ int UserHandler::CheckFileForRecordResult(const string output_data_file) {
 		throw ErrorHandler<string>("UserHandler error:	Output file is not regular file", 
 							       "output_data_file_ = ", output_data_file, 
 								   "RecordCalcResult(float calculation_result, string output_data_file)");
+	return 0;
 }

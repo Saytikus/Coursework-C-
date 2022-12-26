@@ -5,7 +5,7 @@
 #include "/home/stud/C++Projects/Kursach!client/Kursach/Kursach/User.cpp"
 #include "/home/stud/C++Projects/Kursach!client/Kursach/Kursach/UserHandler.cpp"
 
-SUITE(InterfaceTests) {
+SUITE(InterfaceTest) {
 	Interface interface;
 	TEST(UnknownOption) {
 		char* argv[2] {"Kursach", "--self_address"};
@@ -104,8 +104,26 @@ SUITE(InterfaceTests) {
 	}
 }
 
-SUITE() {
-	
+SUITE(GetVectorNumberTest) {
+	UserHandler handler;
+	TEST(ValidFileAndNumber) {
+		CHECK_EQUAL(3, handler.GetVectorNumberFromFile("/home/stud/test/test_input_file"));
+	}
+	TEST(EmptyFilename) {
+		CHECK_THROW(handler.GetVectorNumberFromFile(""), ErrorHandler<string>);
+	}
+	TEST(InvalidFilename) {
+		CHECK_THROW(handler.GetVectorNumberFromFile("welcome"), ErrorHandler<string>);
+	}
+	TEST(EmptyFile) {
+		CHECK_THROW(handler.GetVectorNumberFromFile("/home/stud/test/test_empty_input_file"), ErrorHandler<string>);
+	}
+	TEST(NotRegularFile) {
+		CHECK_THROW(handler.GetVectorNumberFromFile("/home/stud"), ErrorHandler<string>);
+	}
+	TEST(NotNumberInFile) {
+		CHECK_THROW(handler.GetVectorNumberFromFile("/home/stud/test/test_incorrect_value_input_file"), ErrorHandler<string>);
+	}
 }
 int main()
 {

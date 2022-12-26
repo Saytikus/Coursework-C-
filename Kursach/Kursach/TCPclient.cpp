@@ -9,7 +9,7 @@ TCPclient::TCPclient(User user) {
 
     self_addr_ = new (sockaddr_in);
     self_addr_->sin_family = AF_INET; 
-    self_addr_->sin_port = htons(77777);
+    self_addr_->sin_port = htons(55555);
     self_addr_->sin_addr.s_addr = inet_addr("127.0.0.1");
 
     server_address_ = user.GetServerAddress();
@@ -71,9 +71,8 @@ string TCPclient::ReceiveAndGetResponce() {
     char received_msg[16] = {0};
     recv(tcp_socket_, received_msg, sizeof(received_msg), 0);
 	string responce;
-    for(auto& c : received_msg) {
+    for(auto& c : received_msg)
 		responce += c;
-	}
     cout << "Responce from server: " << responce  << endl;
     return responce;
 }
@@ -86,7 +85,7 @@ float TCPclient::ReceiveCalcResult() {
 }
 
 int TCPclient::CloseConnection() {
-	cout << "Connection closed" << endl;
+	cout << "Connection closed." << endl;
     close(tcp_socket_);
     return 0;
 }

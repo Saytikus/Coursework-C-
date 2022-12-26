@@ -69,9 +69,9 @@ int Interface::ReceiveArguments(int argc, char* argv[]) {
 				break;
 				
 			case '?':
-				string opt_string(long_options[opt_index].name);
 				throw ErrorHandler<string>("Interface error:	Unknown option", 
-										   "opt = ", opt_string, "ReceiveArguments()"); 
+										   "opt = ", "?", "ReceiveArguments()");
+				break;
         }
     }
 	if(server_port.empty())
@@ -120,6 +120,7 @@ int Interface::CheckServerPort(string server_port) {
     if(stoi(server_port) < 1024 || stoi(server_port) > 65535)
         throw ErrorHandler<string>("Interface error:	Invalid server port", "server_port_ = ",
 								   server_port, "ReceiveArguments()");
+	return 0;
 }
 
 int Interface::CheckInputFile(string input_data_file) {
@@ -134,6 +135,7 @@ int Interface::CheckInputFile(string input_data_file) {
     if(check_file.is_open() == false)
         throw ErrorHandler<string>("Interface error:	Invalid input filename", "input_data_file_ = ",
 								   input_data_file_, "ReceiveArguments()");
+	return 0;
 }
 int Interface::CheckOutputFile(string output_data_file) {
     if(output_data_file.empty())
@@ -147,6 +149,7 @@ int Interface::CheckOutputFile(string output_data_file) {
     if(check_file.is_open() == false)
         throw ErrorHandler<string>("Interface error:	Invalid output filename", "input_data_file_ = ", 
 								   output_data_file_, "ReceiveArguments()");
+	return 0;
 }
 int Interface::CheckAutFile(string aut_data_file) {
     fs::path aut_data_file_status(aut_data_file);
@@ -159,6 +162,7 @@ int Interface::CheckAutFile(string aut_data_file) {
         throw ErrorHandler<string>("Interface error:	Invalid autentification filename", 
 								   "aut_data_file_ = ", aut_data_file_, 
 								   "ReceiveArguments()");
+	return 0;
 }
 
 bool Interface::isNumber(const string str) {

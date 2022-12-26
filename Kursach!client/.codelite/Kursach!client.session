@@ -1,68 +1,68 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Session Name="/home/stud/C++Projects/Kursach!client/Kursach!client/Kursach!client.workspace">
-  <int Value="6" Name="m_selectedTab"/>
+  <int Value="7" Name="m_selectedTab"/>
   <wxString Value="/home/stud/C++Projects/Kursach!client/Kursach!client/Kursach!client.workspace" Name="m_workspaceName"/>
   <TabInfoArray Name="TabInfoArray">
     <TabInfo>
       <wxString Value="/home/stud/C++Projects/Kursach!client/Kursach/Kursach/main.cpp" Name="FileName"/>
-      <int Value="18" Name="FirstVisibleLine"/>
-      <int Value="39" Name="CurrentLine"/>
+      <int Value="0" Name="FirstVisibleLine"/>
+      <int Value="8" Name="CurrentLine"/>
       <wxArrayString Name="Bookmarks"/>
       <IntVector Name="CollapsedFolds"/>
     </TabInfo>
     <TabInfo>
       <wxString Value="/home/stud/C++Projects/Kursach!client/Kursach/Kursach/UserHandler.cpp" Name="FileName"/>
-      <int Value="63" Name="FirstVisibleLine"/>
-      <int Value="77" Name="CurrentLine"/>
+      <int Value="69" Name="FirstVisibleLine"/>
+      <int Value="84" Name="CurrentLine"/>
       <wxArrayString Name="Bookmarks"/>
       <IntVector Name="CollapsedFolds"/>
     </TabInfo>
     <TabInfo>
       <wxString Value="/home/stud/C++Projects/Kursach!client/Kursach/Kursach/User.h" Name="FileName"/>
-      <int Value="0" Name="FirstVisibleLine"/>
-      <int Value="144" Name="CurrentLine"/>
+      <int Value="147" Name="FirstVisibleLine"/>
+      <int Value="149" Name="CurrentLine"/>
       <wxArrayString Name="Bookmarks"/>
       <IntVector Name="CollapsedFolds"/>
     </TabInfo>
     <TabInfo>
       <wxString Value="/home/stud/C++Projects/Kursach!client/Kursach/Kursach/User.cpp" Name="FileName"/>
-      <int Value="0" Name="FirstVisibleLine"/>
-      <int Value="65" Name="CurrentLine"/>
-      <wxArrayString Name="Bookmarks"/>
-      <IntVector Name="CollapsedFolds"/>
-    </TabInfo>
-    <TabInfo>
-      <wxString Value="/usr/include/c++/10/bits/basic_string.h" Name="FileName"/>
-      <int Value="522" Name="FirstVisibleLine"/>
-      <int Value="524" Name="CurrentLine"/>
+      <int Value="4" Name="FirstVisibleLine"/>
+      <int Value="5" Name="CurrentLine"/>
       <wxArrayString Name="Bookmarks"/>
       <IntVector Name="CollapsedFolds"/>
     </TabInfo>
     <TabInfo>
       <wxString Value="/home/stud/C++Projects/Kursach!client/Kursach/Kursach/Interface.cpp" Name="FileName"/>
-      <int Value="81" Name="FirstVisibleLine"/>
-      <int Value="66" Name="CurrentLine"/>
+      <int Value="74" Name="FirstVisibleLine"/>
+      <int Value="75" Name="CurrentLine"/>
       <wxArrayString Name="Bookmarks"/>
       <IntVector Name="CollapsedFolds"/>
     </TabInfo>
     <TabInfo>
       <wxString Value="/home/stud/C++Projects/Kursach!client/Kursach/Kursach/TCPclient.cpp" Name="FileName"/>
-      <int Value="55" Name="FirstVisibleLine"/>
-      <int Value="67" Name="CurrentLine"/>
-      <wxArrayString Name="Bookmarks"/>
-      <IntVector Name="CollapsedFolds"/>
-    </TabInfo>
-    <TabInfo>
-      <wxString Value="/usr/include/c++/10/ostream" Name="FileName"/>
-      <int Value="770" Name="FirstVisibleLine"/>
-      <int Value="772" Name="CurrentLine"/>
+      <int Value="71" Name="FirstVisibleLine"/>
+      <int Value="73" Name="CurrentLine"/>
       <wxArrayString Name="Bookmarks"/>
       <IntVector Name="CollapsedFolds"/>
     </TabInfo>
     <TabInfo>
       <wxString Value="/usr/include/c++/10/experimental/bits/fs_path.h" Name="FileName"/>
-      <int Value="217" Name="FirstVisibleLine"/>
+      <int Value="233" Name="FirstVisibleLine"/>
       <int Value="235" Name="CurrentLine"/>
+      <wxArrayString Name="Bookmarks"/>
+      <IntVector Name="CollapsedFolds"/>
+    </TabInfo>
+    <TabInfo>
+      <wxString Value="/home/stud/C++Projects/Kursach!client/UnitTest/UnitTest/main.cpp" Name="FileName"/>
+      <int Value="96" Name="FirstVisibleLine"/>
+      <int Value="126" Name="CurrentLine"/>
+      <wxArrayString Name="Bookmarks"/>
+      <IntVector Name="CollapsedFolds"/>
+    </TabInfo>
+    <TabInfo>
+      <wxString Value="/usr/include/c++/10/ostream" Name="FileName"/>
+      <int Value="761" Name="FirstVisibleLine"/>
+      <int Value="772" Name="CurrentLine"/>
       <wxArrayString Name="Bookmarks"/>
       <IntVector Name="CollapsedFolds"/>
     </TabInfo>

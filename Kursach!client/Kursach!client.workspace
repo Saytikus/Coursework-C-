@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CodeLite_Workspace Name="Kursach!client" Database="" Version="10000">
-  <Project Name="Kursach" Path="../Kursach/Kursach/Kursach.project" Active="Yes"/>
-  <Project Name="UnitTest" Path="../UnitTest/UnitTest/UnitTest.project" Active="No"/>
+  <Project Name="Kursach" Path="../Kursach/Kursach/Kursach.project" Active="No"/>
+  <Project Name="UnitTest" Path="../UnitTest/UnitTest/UnitTest.project" Active="Yes"/>
   <BuildMatrix>
     <WorkspaceConfiguration Name="Debug" Selected="yes">
       <Environment/>
